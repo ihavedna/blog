@@ -348,8 +348,9 @@
     }
 
     .post-title {
-      font-family: "ArcaneFable", serif;
-      font-size: 1.15rem;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: normal;
       color: var(--ink);
       margin-bottom: 8px;
       line-height: 1.2;
@@ -449,12 +450,21 @@
 
       <div class="post-list">
 
-        <!-- SLOT 1 — empty -->
-        <div class="post-entry is-empty" aria-hidden="true">
-          <div class="placeholder-line placeholder-title"></div>
-          <div class="placeholder-line placeholder-body-1"></div>
-          <div class="placeholder-line placeholder-body-2"></div>
-        </div>
+        <!-- POST 1 — Hello World -->
+        <article class="post-entry">
+          <div class="post-meta-row">
+            <span class="post-date">7 June 2026</span>
+            <span class="badge badge-gold">First Entry</span>
+          </div>
+          <h2 class="post-title">Hello World</h2>
+          <p class="post-excerpt">The scriptorium opens its doors. A first mark on fresh vellum — this blog is a place for writing about craft, curiosity, and the things worth making. More soon.</p>
+          <div class="post-footer">
+            <span class="post-cta">Read Entry</span>
+            <div class="post-tags">
+              <span class="badge badge-verd">Live</span>
+            </div>
+          </div>
+        </article>
 
         <!-- SLOT 2 — empty -->
         <div class="post-entry is-empty" aria-hidden="true">
