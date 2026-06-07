@@ -52,6 +52,15 @@
       --font-caption:    "Inter", system-ui, sans-serif;
       --radius-sm: 2px;
       --radius-md: 4px;
+
+      /* Backup font stacks (system / web-safe) */
+      --font-display-backup:     "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --font-heading-backup:     Georgia, "Times New Roman", serif;
+      --font-body-backup:        Georgia, "Times New Roman", serif;
+      --font-label-backup:       Georgia, serif;
+      --font-rune-backup:        Georgia, serif;
+      --font-blackletter-backup: "Times New Roman", serif;
+      --font-caption-backup:     system-ui, -apple-system, sans-serif;
     }
 
     [data-theme="dark"] {
@@ -76,6 +85,16 @@
       --surface-codex-1:     #202C40;
       --surface-codex-2:     #182030;
       --surface-codex-shade: rgba(0,20,60,0.2);
+    }
+
+    /* Font backup override */
+    [data-fonts="backup"] {
+      --font-display:     var(--font-display-backup);
+      --font-heading:     var(--font-heading-backup);
+      --font-body:        var(--font-body-backup);
+      --font-label:       var(--font-label-backup);
+      --font-rune:        var(--font-rune-backup);
+      --font-blackletter: var(--font-blackletter-backup);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -109,6 +128,23 @@
       min-height: 100vh;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
+
+    .font-toggle {
+      position: fixed;
+      top: 28px; right: 112px;
+      z-index: 999;
+      background: linear-gradient(135deg, var(--wood-mid), var(--wood-dark));
+      border: 1px solid var(--rule-gold);
+      border-radius: var(--radius-sm);
+      color: var(--gold-light);
+      font-family: var(--font-caption);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .font-toggle:hover { opacity: 0.85; }
 
     .theme-toggle {
       position: fixed;
@@ -284,6 +320,7 @@
 </head>
 <body>
 
+  <button class="font-toggle" onclick="toggleFonts()" aria-label="Toggle backup fonts">Aa</button>
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">☽ / ☀</button>
 
   <div class="codex">
@@ -317,9 +354,21 @@
       html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
       try { localStorage.setItem("_theme", html.getAttribute("data-theme")); } catch(e) {}
     }
+    function toggleFonts() {
+      const html = document.documentElement;
+      const next = html.getAttribute("data-fonts") === "backup" ? "custom" : "backup";
+      html.setAttribute("data-fonts", next);
+      try { localStorage.setItem("_fonts", next); } catch(e) {}
+    }
     try {
-      const saved = localStorage.getItem("_theme");
-      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      const savedTheme = localStorage.getItem("_theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+      const savedFonts = localStorage.getItem("_fonts");
+      if (savedFonts) document.documentElement.setAttribute("data-fonts", savedFonts);
     } catch(e) {}
   </script>
 </body>
