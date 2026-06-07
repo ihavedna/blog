@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='6' y='4' width='20' height='26' rx='2' fill='%23C49A20'/><rect x='6' y='4' width='3' height='26' fill='%238B6914'/><rect x='11' y='10' width='11' height='1.5' rx='.75' fill='%235A3E0A'/><rect x='11' y='14' width='11' height='1.5' rx='.75' fill='%235A3E0A'/><rect x='11' y='18' width='8' height='1.5' rx='.75' fill='%235A3E0A'/></svg>">
+  <title>Hello World — The Scribe's Dispatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    @font-face { font-family: "Kingfall";      src: url("https://raw.githubusercontent.com/ihavedna/projects/main/wizard-style/fonts/kingfall-blessed.otf"); font-weight: normal; }
+    @font-face { font-family: "InkwellScribe"; src: url("https://raw.githubusercontent.com/ihavedna/projects/main/wizard-style/fonts/inkwell-scribe.otf");   font-weight: normal; }
+    @font-face { font-family: "ArcaneFable";   src: url("https://raw.githubusercontent.com/ihavedna/projects/main/wizard-style/fonts/arcane-fable.otf");     font-weight: normal; }
+    @font-face { font-family: "TexturaLibera"; src: url("https://raw.githubusercontent.com/ihavedna/projects/main/wizard-style/fonts/textura-libera.otf");   font-weight: normal; }
+    @font-face { font-family: "MysticOrder";   src: url("https://raw.githubusercontent.com/ihavedna/projects/main/wizard-style/fonts/mystic-order.ttf");     font-weight: normal; }
+    @font-face { font-family: "Scriptoria";    src: url("https://raw.githubusercontent.com/ihavedna/projects/main/wizard-style/fonts/scriptoria.ttf");       font-weight: normal; }
+
+    :root {
+      --parchment:        #F2E0B0;
+      --parchment-dark:   #E0C87A;
+      --parchment-aged:   #D4B483;
+      --vellum:           #FAF0D0;
+      --ink:              #1C0A00;
+      --ink-faded:        #3D2B1F;
+      --ink-dim:          #7A5A28;
+      --vermillion:       #960018;
+      --gold:             #7C5D1F;
+      --gold-bright:      #9A7818;
+      --gold-light:       #E8CC60;
+      --wood-dark:        #2A1A0E;
+      --wood-mid:         #5C3317;
+      --rule-gold:        #7E5D16;
+      --rule-faded:       #7A5A28;
+      --shadow-deep:      rgba(15,5,0,0.6);
+      --shadow-soft:      rgba(40,20,5,0.25);
+      --page-bg:          #2A1A0E;
+      --page-bg-hl1:      #4A2C10;
+      --page-bg-hl2:      #1C0E06;
+      --surface-codex-hl:    #FDF3D0;
+      --surface-codex-1:     #F5E5B8;
+      --surface-codex-2:     #E8D090;
+      --surface-codex-shade: rgba(180,130,40,0.15);
+      --badge-gold-1:    #8A6010;
+      --badge-gold-2:    #5C3E08;
+      --badge-gold-text: #FFF0C0;
+      --badge-gold-bdr:  #D4AF37;
+      --font-display:    "Kingfall", "TexturaLibera", serif;
+      --font-body:       "InkwellScribe", "Scriptoria", Georgia, serif;
+      --font-label:      "ArcaneFable", "MysticOrder", serif;
+      --font-rune:       "MysticOrder", "ArcaneFable", serif;
+      --font-caption:    "Inter", system-ui, sans-serif;
+      --radius-sm: 2px;
+      --radius-md: 4px;
+    }
+
+    [data-theme="dark"] {
+      --parchment:        #1C2838;
+      --parchment-dark:   #182030;
+      --parchment-aged:   #283448;
+      --ink:              #E8D8B8;
+      --ink-faded:        #C8B890;
+      --ink-dim:          #908060;
+      --vermillion:       #FF7888;
+      --gold:             #C8A840;
+      --gold-bright:      #E0C050;
+      --wood-dark:        #0A1020;
+      --rule-gold:        #8A7030;
+      --rule-faded:       #4A5870;
+      --shadow-deep:      rgba(0,0,0,0.7);
+      --shadow-soft:      rgba(0,10,30,0.4);
+      --page-bg:          #0A1018;
+      --page-bg-hl1:      #142030;
+      --page-bg-hl2:      #060C14;
+      --surface-codex-hl:    #283448;
+      --surface-codex-1:     #202C40;
+      --surface-codex-2:     #182030;
+      --surface-codex-shade: rgba(0,20,60,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 14px;
+      border: 1px solid rgba(184,136,32,0.22);
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      background-image:
+        repeating-linear-gradient(60deg,  transparent, transparent 22px, rgba(180,120,30,0.05) 22px, rgba(180,120,30,0.05) 23px),
+        repeating-linear-gradient(-60deg, transparent, transparent 22px, rgba(180,120,30,0.05) 22px, rgba(180,120,30,0.05) 23px),
+        radial-gradient(ellipse at 0% 0%,    rgba(0,0,0,0.72) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 0%,  rgba(0,0,0,0.72) 0%, transparent 40%),
+        radial-gradient(ellipse at 0% 100%,  rgba(0,0,0,0.72) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 100%,rgba(0,0,0,0.72) 0%, transparent 40%),
+        radial-gradient(ellipse 72% 55% at 50% 50%, var(--page-bg-hl1) 0%, transparent 100%),
+        radial-gradient(ellipse at 70% 80%, var(--page-bg-hl2) 0%, transparent 50%);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      padding: 48px 24px 100px;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 28px; right: 28px;
+      z-index: 999;
+      background: linear-gradient(135deg, var(--wood-mid), var(--wood-dark));
+      border: 1px solid var(--rule-gold);
+      border-radius: var(--radius-sm);
+      color: var(--gold-light);
+      font-family: var(--font-label);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .theme-toggle:hover { opacity: 0.85; }
+
+    .codex {
+      max-width: 720px;
+      margin: 0 auto;
+      background:
+        radial-gradient(ellipse 90% 12% at 50% 0%,  rgba(184,136,32,0.09) 0%, transparent 100%),
+        radial-gradient(ellipse at 15% 0%,   var(--surface-codex-hl) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 100%, var(--parchment-dark)   0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%,  var(--surface-codex-1)  0%, var(--surface-codex-2) 100%);
+      border: 3px solid var(--rule-gold);
+      border-radius: var(--radius-md);
+      box-shadow:
+        0 0 0 6px var(--wood-dark),
+        0 0 0 10px var(--rule-gold),
+        0 0 0 14px var(--wood-dark),
+        0 0 120px rgba(140,80,10,0.55),
+        0 8px 48px var(--shadow-deep),
+        inset 0 0 60px var(--surface-codex-shade);
+      padding: 56px 64px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .codex::before {
+      content: "";
+      position: absolute; inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(120,80,20,0.028) 44px, rgba(120,80,20,0.028) 45px);
+    }
+    .codex > * { position: relative; z-index: 1; }
+
+    /* ── Post header ── */
+    .post-header {
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--rule-faded);
+    }
+
+    .back-link {
+      display: inline-block;
+      font-family: var(--font-caption);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      margin-bottom: 24px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .back-link::before { content: "← "; }
+    .back-link:hover { opacity: 1; }
+
+    .post-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .post-date {
+      font-family: var(--font-caption);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-caption);
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+    .badge-gold {
+      background: linear-gradient(135deg, var(--badge-gold-1), var(--badge-gold-2));
+      color: var(--badge-gold-text);
+      border: 1px solid var(--badge-gold-bdr);
+    }
+
+    .post-title {
+      font-family: "ArcaneFable", serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--ink);
+      font-weight: normal;
+      line-height: 1.15;
+      margin-bottom: 0;
+    }
+
+    /* ── Post body ── */
+    .post-body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--ink-faded);
+      line-height: 1.75;
+    }
+
+    .post-body p { margin-bottom: 1.4em; }
+    .post-body p:last-child { margin-bottom: 0; }
+
+    /* Drop cap on first paragraph */
+    .post-body > p:first-child::first-letter {
+      font-family: var(--font-display);
+      font-size: 4em;
+      float: left;
+      line-height: 0.78;
+      padding: 4px 8px 0 0;
+      color: var(--vermillion);
+      text-shadow: 1px 1px 0 var(--gold);
+    }
+
+    /* ── Footer ── */
+    .post-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule-faded);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-link {
+      font-family: var(--font-label);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--gold-bright); }
+    .nav-link.next::after { content: " →"; }
+    .nav-link.prev::before { content: "← "; }
+
+    .page-footer {
+      margin-top: 56px;
+      text-align: center;
+      font-family: var(--font-caption);
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--rule-gold);
+      opacity: 0.4;
+    }
+
+    @media (max-width: 600px) {
+      .codex { padding: 36px 24px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">☽ / ☀</button>
+
+  <div class="codex">
+    <header class="post-header">
+      <a class="back-link" href="../../../../">The Scribe's Dispatch</a>
+      <div class="post-eyebrow">
+        <span class="post-date">7 June 2026</span>
+        <span class="badge badge-gold">First Entry</span>
+      </div>
+      <h1 class="post-title">Hello World</h1>
+    </header>
+
+    <div class="post-body">
+      <p>The scriptorium opens its doors. A first mark on fresh vellum — this blog is a place for writing about craft, curiosity, and the things worth making.</p>
+      <p>More soon.</p>
+    </div>
+
+    <div class="post-footer">
+      <span></span>
+      <a class="nav-link next" href="../../../../">All Entries</a>
+    </div>
+
+    <footer class="page-footer">
+      <p>The Scribe's Dispatch</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+      try { localStorage.setItem("_theme", html.getAttribute("data-theme")); } catch(e) {}
+    }
+    try {
+      const saved = localStorage.getItem("_theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+    } catch(e) {}
+  </script>
+</body>
+</html>
