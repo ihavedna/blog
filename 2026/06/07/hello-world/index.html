@@ -289,8 +289,8 @@
       float: left;
       line-height: 0.75;
       padding: 4px 8px 0 0;
-      color: var(--verdigris);
-      text-shadow: 1px 1px 0 var(--rule-gold);
+      color: var(--vermillion);
+      text-shadow: 1px 1px 0 var(--gold);
     }
 
     /* ── Footer ── */
@@ -342,6 +342,12 @@
     [data-theme="dark"] .post-entry:hover .post-cta,
     [data-theme="dark"] .project-card:hover .card-cta {
       color: var(--azurite);
+    }
+
+    /* Dark mode drop cap — verdigris instead of vermillion */
+    [data-theme="dark"] .post-body > p:first-child::first-letter {
+      color: var(--verdigris);
+      text-shadow: 1px 1px 0 var(--rule-gold);
     }
   </style>
 </head>
