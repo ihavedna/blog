@@ -365,7 +365,7 @@
     .post-title {
       font-family: "ArcaneFable", serif;
       font-size: 1.15rem;
-      color: var(--ink);
+      color: var(--vermillion);
       margin-bottom: 8px;
       line-height: 1.2;
       position: relative;
@@ -456,6 +456,16 @@
     [data-theme="dark"] .post-entry:hover .post-cta,
     [data-theme="dark"] .project-card:hover .card-cta {
       color: var(--azurite);
+    }
+
+    /* Dark mode card title — yellow (via --vermillion token) */
+    [data-theme="dark"] .post-title {
+      color: var(--vermillion);
+    }
+
+    /* Dark mode card date — verdigris */
+    [data-theme="dark"] .post-date {
+      color: var(--verdigris);
     }
   </style>
 </head>
