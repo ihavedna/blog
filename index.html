@@ -312,34 +312,6 @@
     }
     .section-label::after { background: linear-gradient(to left, transparent, var(--rule-gold)); }
 
-    /* ── Badge ── */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-caption);
-      font-size: 8px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 2px;
-    }
-    .badge-gold {
-      background: linear-gradient(135deg, var(--badge-gold-1), var(--badge-gold-2));
-      color: var(--badge-gold-text);
-      border: 1px solid var(--badge-gold-bdr);
-    }
-    .badge-verd {
-      background: linear-gradient(135deg, var(--badge-verd-1), var(--badge-verd-2));
-      color: var(--badge-verd-text);
-      border: 1px solid rgba(40,184,96,0.35);
-    }
-    .badge-ink {
-      background: linear-gradient(135deg, var(--badge-ink-1), var(--badge-ink-2));
-      color: var(--badge-ink-text);
-      border: 1px solid var(--badge-ink-bdr);
-    }
-
     /* ── Post list ── */
     .post-list {
       display: flex;
@@ -496,15 +468,11 @@
         <article class="post-entry" onclick="location.href='2026/06/07/hello-world/'" style="cursor:pointer">
           <div class="post-meta-row">
             <span class="post-date">7 June 2026</span>
-            <span class="badge badge-gold">First Entry</span>
           </div>
           <h2 class="post-title">Hello World</h2>
           <p class="post-excerpt">The scriptorium opens its doors. A first mark on fresh vellum — this blog is a place for writing about craft, curiosity, and the things worth making. More soon.</p>
           <div class="post-footer">
             <a class="post-cta" href="2026/06/07/hello-world/">Read Entry</a>
-            <div class="post-tags">
-              <span class="badge badge-verd">Live</span>
-            </div>
           </div>
         </article>
 
